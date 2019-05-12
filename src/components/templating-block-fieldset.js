@@ -43,7 +43,7 @@ class TemplatingBlockFieldSet extends HTMLElement {
 		${field.type === 'image' ?
 			'<image-selector ' :
 			'<input type="text" class="slds-input" '
-		} id="template-field-${idx}" value="${field.value}" />
+		} id="template-field-${idx}" value="${field.value || ''}" />
 	</div>
 </div>
 `;
