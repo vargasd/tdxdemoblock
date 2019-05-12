@@ -17,14 +17,16 @@ class TemplatingBlockApp extends HTMLElement {
 			}));
 
 		// not using shadow DOM to avoid loading SLDS styles _everywhere_
-		const selector = document.createElement('templating-block-selector');
-		selector.assetId = this.assetId;
-		this.appendChild(selector);
+		if (!this.locked) {
+			const selector = document.createElement('templating-block-selector');
+			selector.assetId = this.assetId;
+			this.appendChild(selector);
+			selector.addEventListener('change', dispatchEvent('template'));
+		}
 
 		this.fieldSet = document.createElement('templating-block-fieldset');
 		this.appendChild(this.fieldSet);
 
-		selector.addEventListener('change', dispatchEvent('template'));
 		this.fieldSet.addEventListener('change', dispatchEvent('fields'));
 	}
 }

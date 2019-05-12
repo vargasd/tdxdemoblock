@@ -17,6 +17,8 @@ For example:
 
 The supported types are `link`, `text`, and `image`.
 
+To lock the configuration to a specific blocks, provision the custom block URL with the asset ID in the URL hash (e.g. `https://myblockbaseurl.com/#12345`).
+
 ## Development
 
 ### Install and run as a node app

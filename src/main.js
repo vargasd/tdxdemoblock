@@ -2,6 +2,7 @@ import '../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-li
 import './components/templating-block-app';
 import SDK from 'blocksdk';
 import { getHtml, parseTemplate } from './lib/templating-block-utils';
+import { getBlock } from './lib/api';
 
 var sdk = new SDK();
 
@@ -12,6 +13,7 @@ async function triggerAuth() {
 
 function initializeApp(data) {
 	const app = document.createElement('templating-block-app');
+	app.locked = data.locked;
 	if (data.template) {
 		app.assetId = data.template.id;
 	}
@@ -36,25 +38,43 @@ function initializeApp(data) {
 					break;
 			}
 
-			// always set data with latest
-			sdk.setData(newBlockData);
-			// set content with latest changes
-			sdk.setContent(getHtml(newBlockData.template, newBlockData.fields, false));
-			// update preview to use latest, with placeholders for preview
-			sdk.setSuperContent(getHtml(newBlockData.template, newBlockData.fields, true));
+			setEverything(newBlockData);
 		});
-
 	});
 
 	document.getElementById('workspace').appendChild(app);
 	app.fields = data.fields;
 }
 
-triggerAuth();
+function setEverything(data) {
+	// always set data with latest
+	sdk.setData(data);
+	// set content with latest changes
+	sdk.setContent(getHtml(data.template, data.fields, false));
+	// update preview to use latest, with placeholders for preview
+	sdk.setSuperContent(getHtml(data.template, data.fields, true));
+}
 
-sdk.getData(data => {
-	/*if (window.location.hash) {
-		data.assetId = window.location.hash.substring(1);
-	}*/
+async function getOverrideData(data, assetId) {
+	data.template = await getBlock(assetId);
+	data.fields = parseTemplate(data.template).map((field, idx) => {
+		return {
+			...field,
+			value: data.fields && data.fields[idx] && data.fields[idx].value || ''
+		};
+	});
+	data.locked = true;
+
+	return data;
+}
+
+sdk.getData(async (data) => {
+	if (window.location.hash) {
+		const overrideData = await getOverrideData(data, window.location.hash.substring(1));
+		setEverything(overrideData);
+	}
+
 	initializeApp(data);
 });
+
+triggerAuth();
