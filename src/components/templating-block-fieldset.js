@@ -1,3 +1,5 @@
+import './image-selector';
+
 const template = document.createElement('template');
 template.innerHTML = `
 <div class="slds-box">
@@ -36,7 +38,10 @@ class TemplatingBlockFieldSet extends HTMLElement {
 <div class="slds-form-element">
 	<label class="slds-form-element__label" for="template-field-${idx}">${field.title}</label>
 	<div class="slds-form-element__control">
-		<input type="text" class="slds-input" id="template-field-${idx}"/>
+		${field.type === 'image' ?
+			'<image-selector ' :
+			'<input type="text" class="slds-input" '
+		} id="template-field-${idx}" />
 	</div>
 </div>
 `;

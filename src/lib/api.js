@@ -18,3 +18,21 @@ export async function getCustomTemplates() {
 		}
 	});
 }
+
+export function getImagesCached() {
+	let images;
+	return async () => {
+		if (!images) {
+			images = post('asset/v1/content/assets/query', {
+				query: {
+					property: "assetType.id",
+					simpleOperator: "in",
+					value: [20, 22, 23, 28]
+				}
+			});
+		}
+		return images;
+	}
+}
+
+export const getImages = getImagesCached();
