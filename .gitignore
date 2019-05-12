@@ -1,0 +1,31 @@
+# GRUNT TEST COVERAGE FILES
+/temp/**
+/coverage/**
+
+# NODE/NPM/GRUNT
+node_modules
+npm-debug.log
+.npm-debug.log
+
+# ECLIPSE/APTANA STUDIO
+.project
+
+# WEBSTORM
+.idea/
+*.iml
+
+# SUBLIME
+/*.sublime-project
+*.sublime-workspace
+
+# VIM
+*.sw?
+
+# MAC STUFF
+.DS_Store
+*.orig
+
+# Local dev
+server.cert
+server.key
+.env

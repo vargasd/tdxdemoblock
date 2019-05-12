@@ -1,0 +1,43 @@
+{
+  "name": "tdxdemoblock",
+  "version": "0.0.1",
+  "description": "BlockSDK demo block for TDX 2019 - Block Template Configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vargasd/tdxdemoblock.git"
+  },
+  "engines": {
+    "npm": "5.8.0",
+    "node": "8.9.4"
+  },
+  "author": "Sam Varga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vargasd/tdxdemoblock/issues"
+  },
+  "homepage": "https://github.com/vargasd/tdxdemoblock",
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.9.2",
+    "blocksdk": "^1.1.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "http-proxy-middleware": "^0.19.1",
+    "jwt-simple": "^0.5.6",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "dotenv": "^8.0.0",
+    "file-loader": "^3.0.1",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
