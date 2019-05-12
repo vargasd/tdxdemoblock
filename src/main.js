@@ -10,10 +10,10 @@ async function triggerAuth() {
 	sdk.triggerAuth(await response.text());
 }
 
-function initializeApp() {
+function initializeApp(data) {
 	const app = document.createElement('templating-block-app');
-	if (window.location.hash) {
-		app.assetId = window.location.hash.substring(1);
+	if (data.template) {
+		app.assetId = data.template.id;
 	}
 
 	// respond to app changes
@@ -43,10 +43,18 @@ function initializeApp() {
 			// update preview to use latest, with placeholders for preview
 			sdk.setSuperContent(getHtml(newBlockData.template, newBlockData.fields, true));
 		});
+
 	});
 
 	document.getElementById('workspace').appendChild(app);
+	app.fields = data.fields;
 }
 
 triggerAuth();
-initializeApp();
+
+sdk.getData(data => {
+	/*if (window.location.hash) {
+		data.assetId = window.location.hash.substring(1);
+	}*/
+	initializeApp(data);
+});

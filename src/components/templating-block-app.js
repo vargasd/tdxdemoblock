@@ -1,15 +1,9 @@
 import './templating-block-selector';
 import './templating-block-fieldset';
 
-const template = document.createElement('template');
-template.innerHTML = `
-<templating-block-selector></templating-block-selector>
-<templating-block-fieldset></templating-block-fieldset>
-`;
-
 class TemplatingBlockApp extends HTMLElement {
 	set fields(val) {
-		this.querySelector('templating-block-fieldset').fields = val;
+		this.fieldSet.fields = val;
 	}
 
 	connectedCallback() {
@@ -23,10 +17,15 @@ class TemplatingBlockApp extends HTMLElement {
 			}));
 
 		// not using shadow DOM to avoid loading SLDS styles _everywhere_
-		this.appendChild(template.content.cloneNode(true));
+		const selector = document.createElement('templating-block-selector');
+		selector.assetId = this.assetId;
+		this.appendChild(selector);
 
-		this.querySelector('templating-block-selector').addEventListener('change', dispatchEvent('template'));
-		this.querySelector('templating-block-fieldset').addEventListener('change', dispatchEvent('fields'));
+		this.fieldSet = document.createElement('templating-block-fieldset');
+		this.appendChild(this.fieldSet);
+
+		selector.addEventListener('change', dispatchEvent('template'));
+		this.fieldSet.addEventListener('change', dispatchEvent('fields'));
 	}
 }
 

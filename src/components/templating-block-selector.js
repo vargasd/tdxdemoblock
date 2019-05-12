@@ -28,6 +28,9 @@ class TemplatingBlockSelector extends HTMLElement {
 		const assets = await getCustomTemplates();
 
 		this.querySelector('.slds-form-element__control').innerHTML = assets.items.map(this.getRadioHtml).join('');
+		if (this.assetId) {
+			document.getElementById(this.assetId).checked = 'checked';
+		}
 	}
 
 	getRadioHtml(asset) {

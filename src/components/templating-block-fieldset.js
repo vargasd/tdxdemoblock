@@ -8,8 +8,10 @@ template.innerHTML = `
 
 class TemplatingBlockFieldSet extends HTMLElement {
 	set fields(val) {
-		this.firstElementChild.innerHTML = val.map(this.getFieldHtml).join('');
-		this._fields = val;
+		if (val) {
+			this.firstElementChild.innerHTML = val.map(this.getFieldHtml).join('');
+			this._fields = val;
+		}
 	}
 
 	async connectedCallback() {
@@ -41,7 +43,7 @@ class TemplatingBlockFieldSet extends HTMLElement {
 		${field.type === 'image' ?
 			'<image-selector ' :
 			'<input type="text" class="slds-input" '
-		} id="template-field-${idx}" />
+		} id="template-field-${idx}" value="${field.value}" />
 	</div>
 </div>
 `;
