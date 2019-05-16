@@ -1,6 +1,6 @@
 let template = document.createElement('template');
 template.innerHTML = `
-<article class="slds-box" style="cursor: pointer;">
+<article class="slds-box slds-box" style="cursor: pointer; height: 100%;">
 	<span class="name" style="word-break: break-all;"></span>
 	<div class="slds-card__body slds-card__body_inner">
 		<img />

@@ -4,7 +4,7 @@ import './image-card';
 const template = document.createElement('template');
 template.innerHTML = `
 <button class="slds-button slds-button_neutral">Select</button>
-<div class="slds-grid slds-gutters slds-wrap" style="display: none;"></div>
+<div class="slds-grid slds-gutters slds-wrap slds-grid_vertical-stretch" style="display: none;"></div>
 `;
 
 class ImageSelector extends HTMLElement {
@@ -31,7 +31,7 @@ class ImageSelector extends HTMLElement {
 
 	_getImageHTML(image) {
 		return `
-<div class="slds-col slds-size_1-of-3">
+<div class="slds-col slds-size_1-of-2 slds-p-top_x-small">
 	<image-card id="${image.id}" name="${image.name}" url="${image.fileProperties.publishedURL}"></image-card>
 </div>
 		`;
