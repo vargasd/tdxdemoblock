@@ -25,6 +25,7 @@
     "@salesforce-ux/design-system": "^2.9.2",
     "blocksdk": "^1.1.1",
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "http-proxy-middleware": "^0.19.1",

@@ -1,15 +1,9 @@
-import '../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css';
 import './components/templating-block-app';
 import SDK from 'blocksdk';
 import { getHtml, parseTemplate } from './lib/templating-block-utils';
 import { getBlock } from './lib/api';
 
 var sdk = new SDK();
-
-async function triggerAuth() {
-	const response = await fetch('/appID');
-	sdk.triggerAuth(await response.text());
-}
 
 function initializeApp(data) {
 	const app = document.createElement('templating-block-app');
@@ -69,12 +63,12 @@ async function getOverrideData(data, assetId) {
 }
 
 sdk.getData(async (data) => {
-	if (window.location.hash) {
-		const overrideData = await getOverrideData(data, window.location.hash.substring(1));
+	if (window.app.assetId) {
+		const overrideData = await getOverrideData(data, window.app.assetId);
 		setEverything(overrideData);
 	}
 
 	initializeApp(data);
 });
 
-triggerAuth();
+sdk.triggerAuth(window.app.appID);

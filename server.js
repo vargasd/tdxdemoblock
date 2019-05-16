@@ -59,6 +59,7 @@ function verifyAuth(req, res, next) {
 }
 
 var app = express();
+app.set('view engine', 'ejs');
 
 // body parser for post
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,8 +84,18 @@ app.use(session({
 }));
 
 //static serve or the dist folder
-app.use(express.static('dist'));
+app.use('/public', express.static('dist'));
 app.use('/assets', express.static('node_modules/@salesforce-ux/design-system/assets'));
+
+app.get(['/', '/block/:assetId(\\d+)'], (req, res) => {
+	res.render('index', {
+		app: JSON.stringify({
+			appID,
+			...req.params
+		})
+	});
+});
+
 
 // the code below proxies REST calls from the UI
 // waits up to ten seconds for authentication, and then sends
@@ -111,10 +122,6 @@ app.use('/proxy',
 		},
 	})
 );
-
-app.get('/appID', (req, res) => {
-	res.send(appID);
-});
 
 // MC Oath will post to whatever URL you specify as the login URL
 // in the app center when the uer opens the app. In our case /login

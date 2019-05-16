@@ -13,11 +13,13 @@ The template blocks should be HTML or code snippet blocks, and should have the t
 
 For example:
 
-`<a href="[[link|Hero Link|]]"><img src="[[image|Hero Image|https://dummyimage.com/600x400/000/fff.png?text=hero]]"></a>`
+```html
+<a href="[[link|Hero Link|]]"><img src="[[image|Hero Image|https://dummyimage.com/600x400/000/fff.png?text=hero]]"></a>`
+```
 
 The supported types are `link`, `text`, and `image`.
 
-To lock the configuration to a specific blocks, provision the custom block URL with the asset ID in the URL hash (e.g. `https://myblockbaseurl.com/#12345`).
+To lock the configuration to a specific block, provision the custom block URL with the block ID. (e.g. `https://myblockbaseurl.com/block/12345`).
 
 ## Development
 

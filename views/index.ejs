@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Templating Block</title>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css" />
   </head>
   <body>
     <article class="slds-card">
@@ -28,6 +29,9 @@
       <footer class="slds-card__footer">For use in Salesforce Marketing Cloud block SDK demos only</footer>
     </article>
 
-    <script src="./main.js"></script>
+    <script>
+      window.app = <%- app %>
+    </script>
+    <script src="/public/main.js"></script>
   </body>
 </html>
