@@ -1,12 +1,12 @@
-var express = require('express');
-var session = require('express-session');
-var proxy = require('http-proxy-middleware');
-var bodyParser = require('body-parser');
-var jwt = require('jwt-simple');
-var request = require('request');
-var EventEmitter = require('events').EventEmitter;
-var fs = require('fs');
-var https = require('https');
+const express = require('express');
+const session = require('express-session');
+const proxy = require('http-proxy-middleware');
+const bodyParser = require('body-parser');
+const jwt = require('jwt-simple');
+const request = require('request');
+const EventEmitter = require('events').EventEmitter;
+const fs = require('fs');
+const https = require('https');
 
 if (process.env.NODE_ENV === 'development') {
 	require('dotenv').config();
@@ -15,15 +15,15 @@ if (process.env.NODE_ENV === 'development') {
 // wherever this is hosted needs to have those
 // environment variables set to the MC app values
 // given to you by the app center page
-var secret = process.env.APP_SIGNATURE;
-var clientId = process.env.CLIENT_ID;
-var clientSecret = process.env.CLIENT_SECRET;
-var appID = process.env.APP_ID;
-var authEmitter = new EventEmitter();
+const secret = process.env.APP_SIGNATURE;
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const appID = process.env.APP_ID;
+const authEmitter = new EventEmitter();
 
 function waitForAuth(req, ttl) {
 	return new Promise(function (resolve, reject) {
-		var timeout = setTimeout(
+		const timeout = setTimeout(
 			function () {
 				removeListener();
 				reject('auth timeout expired');
@@ -31,7 +31,7 @@ function waitForAuth(req, ttl) {
 			ttl
 		);
 
-		var listener = function (authData) {
+		const listener = function (authData) {
 			if (authData.sessionID === req.sessionID) {
 				req.session.accessToken = authData.accessToken;
 				clearTimeout(timeout);
@@ -40,7 +40,7 @@ function waitForAuth(req, ttl) {
 			}
 		};
 
-		var removeListener = function () {
+		const removeListener = function () {
 			authEmitter.removeListener('authed', listener);
 		};
 
@@ -58,7 +58,7 @@ function verifyAuth(req, res, next) {
 		.catch(function (error) { res.send(401); });
 }
 
-var app = express();
+const app = express();
 app.set('view engine', 'ejs');
 
 // body parser for post
@@ -130,9 +130,9 @@ app.use('/proxy',
 // the posted jwt has a refreshToken that we can use to get
 // an access token. That access is used to authenticate MC API calls
 app.post('/login', (req, res, next) => {
-	var encodedJWT = req.body.jwt;
-	var decodedJWT = jwt.decode(encodedJWT, secret);
-	var restInfo = decodedJWT.request.rest;
+	const encodedJWT = req.body.jwt;
+	const decodedJWT = jwt.decode(encodedJWT, secret);
+	const restInfo = decodedJWT.request.rest;
 	// the call to the auth endpoint is done right away
 	// for demo purposes. In a prod app, you will want to
 	// separate that logic out and repeat this process
@@ -146,7 +146,7 @@ app.post('/login', (req, res, next) => {
 		}
 	}, (error, response, body) => {
 		if (!error && response.statusCode == 200) {
-			var result = JSON.parse(body);
+			const result = JSON.parse(body);
 			// storing the refresh token is useless in the demo
 			// but in a prod app it will be used next time we
 			// want to refresh the access token

@@ -3,7 +3,7 @@ import SDK from 'blocksdk';
 import { getHtml, parseTemplate } from './lib/templating-block-utils';
 import { getBlock } from './lib/api';
 
-var sdk = new SDK();
+const sdk = new SDK();
 
 function initializeApp(data) {
 	const app = document.createElement('templating-block-app');
