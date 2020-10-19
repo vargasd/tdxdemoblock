@@ -1,20 +1,24 @@
 # BlockSDK Demo Block
+
 Sample Salesforce Marketing Cloud Content Builder Block using the [blocksdk](https://github.com/salesforce-marketingcloud/blocksdk) and SSO OAuth.
 
-*This block is meant for demo purposes only.* There is insecure code, most notably storing an auth token on the session, and allow cross-site scripting in the browser.
+_This block is meant for demo purposes only._ There is insecure code, most notably storing an auth token on the session, and allow cross-site scripting in the browser.
 
 ## Description
 
 This block is meant to demonstrate a common use case. It allows an HTML/AMPscript developer set up block templates that can then be configured by a less technical user without potentially changing something they shouldn't.
 
-The template blocks should be HTML or code snippet blocks, and should have the tag `customblock-template`. The HTML will drive the UI of the block. The field replacement indicators in the HTML look like this:
+The template blocks should be HTML or code snippet blocks, and should have the tag `customblocktemplate`. The HTML will drive the UI of the block. The field replacement indicators in the HTML look like this:
 
 `[[<field type>|<field name>|<superContent placeholder text (optional)>]]`
 
 For example:
 
 ```html
-<a href="[[link|Hero Link|]]"><img src="[[image|Hero Image|https://dummyimage.com/600x400/000/fff.png?text=hero]]"></a>`
+<a href="[[link|Hero Link|]]"
+  ><img
+    src="[[image|Hero Image|https://dummyimage.com/600x400/000/fff.png?text=hero]]" /></a
+>`
 ```
 
 The supported types are `link`, `text`, and `image`.
@@ -29,6 +33,7 @@ To lock the configuration to a specific block, provision the custom block URL wi
 npm install
 npm start
 ```
+
 One click deployment to heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
@@ -37,10 +42,10 @@ One click deployment to heroku:
 
 The node app needs the following env variables set:
 
- * APP_ID - the app ID or installed package ID so it knows what SSO page to send to
- * APP_SIGNATURE - the app signature or JWT signing secret so it can decode the JWT passed by SSO
- * CLIENT_ID - the client id from the API integration so it can use the auth endpoing to get a token
- * CLIENT_SECRET - the client secret from the API integration so it can use the auth endpoing to get a token
+- APP_ID - the app ID or installed package ID so it knows what SSO page to send to
+- APP_SIGNATURE - the app signature or JWT signing secret so it can decode the JWT passed by SSO
+- CLIENT_ID - the client id from the API integration so it can use the auth endpoing to get a token
+- CLIENT_SECRET - the client secret from the API integration so it can use the auth endpoing to get a token
 
 You can use a [.env](https://www.npmjs.com/package/dotenv) to make this process simpler.
 
