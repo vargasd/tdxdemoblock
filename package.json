@@ -26,7 +26,7 @@
     "blocksdk": "^1.1.1",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.16.1",
     "http-proxy-middleware": "^0.19.1",
     "jwt-simple": "^0.5.6",
